@@ -1,11 +1,10 @@
 use std::ffi::c_void;
-use std::os::raw::{c_char, c_int, c_ulong};
+use std::os::raw::{c_int, c_ulong};
 use std::ptr;
 use std::io::{Error};
 
-use morello::capability::Capability;
 
-pub fn get_root_seal(sealcap: *mut Capability, sealcap_size: usize) -> Result<(), Error> {
+pub fn get_root_seal(sealcap: *const i64, sealcap_size: usize) -> Result<(), Error> {
 
         
     // Get the sealing capability
