@@ -11,7 +11,7 @@ pub fn get_root_seal(sealcap: *mut Capability, sealcap_size: usize) -> Result<()
     // Get the sealing capability
     let result = unsafe {
         sysctlbyname(
-            "security.cheri.sealcap\0".as_ptr() as Capability,
+            "security.cheri.sealcap\0".as_ptr(),
             sealcap as *mut c_void,
             &sealcap_size,
             ptr::null_mut(),
@@ -28,7 +28,7 @@ pub fn get_root_seal(sealcap: *mut Capability, sealcap_size: usize) -> Result<()
 
 extern "C" {
     fn sysctlbyname(
-        name: *const c_char,
+        name: *const u8,
         oldp: *mut c_void,
         oldlenp: *const usize,
         newp: *const c_void,
