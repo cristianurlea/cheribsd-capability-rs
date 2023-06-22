@@ -5,14 +5,14 @@ use std::io::{Error};
 
 use morello::capability::Capability;
 
-pub fn get_root_seal(sealcap: *mut c_void, sealcap_size: usize) -> Result<(), Error> {
+pub fn get_root_seal(sealcap: *mut Capability, sealcap_size: usize) -> Result<(), Error> {
 
         
     // Get the sealing capability
     let result = unsafe {
         sysctlbyname(
             "security.cheri.sealcap\0".as_ptr() as Capability,
-            sealcap,
+            sealcap as *mut c_void,
             &sealcap_size,
             ptr::null_mut(),
             0,
@@ -20,9 +20,9 @@ pub fn get_root_seal(sealcap: *mut c_void, sealcap_size: usize) -> Result<(), Er
     };
     
     if result < 0 {
-        Err(Error::last_os_error())
+        return Err(Error::last_os_error())
     } else {
-        Ok(())
+        return Ok(())
     }
 }
 
