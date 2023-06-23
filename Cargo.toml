@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 morello = { path = "./morello-capability-rs" }
+libc = "0.2.107"
