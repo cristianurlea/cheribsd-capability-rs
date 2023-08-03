@@ -1,7 +1,7 @@
-use std::os::raw::{c_void, c_int, c_char};
+use std::os::raw::{c_void};
 use std::ptr;
 use std::io::{Error};
-use libc::{sysctlbyname, perror};
+use libc::{sysctlbyname};
 
 
 pub fn get_root_seal<T>(sealcap: *mut T, sealcap_size: *mut usize) -> Result<(), Error> {
